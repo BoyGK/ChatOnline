@@ -1,6 +1,6 @@
 package com.chatonline.master;
 
-import com.chatonline.master.util.CreateUserFactory;
+import com.chatonline.master.upper.util.CreateUserFactory;
 
 public class Main {
 

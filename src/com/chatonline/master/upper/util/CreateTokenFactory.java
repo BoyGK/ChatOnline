@@ -1,4 +1,4 @@
-package com.chatonline.master.util;
+package com.chatonline.master.upper.util;
 
 import java.util.Random;
 

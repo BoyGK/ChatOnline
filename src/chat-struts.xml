@@ -6,9 +6,7 @@
 
 <struts>
 
-    <package name="default" namespace="/" extends="struts-default">
-    </package>
+    <package name="chat" extends="struts-default" namespace="/chat">
 
-    <include file="/upper-struts.xml"></include>
-    <include file="/chat-struts.xml"></include>
+    </package>
 </struts>

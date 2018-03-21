@@ -1,7 +1,7 @@
-package com.chatonline.master.dao;
+package com.chatonline.master.upper.dao;
 
-import com.chatonline.master.bean.User;
-import com.chatonline.master.util.CreateUserFactory;
+import com.chatonline.master.upper.bean.User;
+import com.chatonline.master.upper.util.CreateUserFactory;
 
 /**
  * 模拟用户数据库操作

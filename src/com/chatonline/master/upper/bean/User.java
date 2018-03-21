@@ -1,4 +1,4 @@
-package com.chatonline.master.bean;
+package com.chatonline.master.upper.bean;
 
 /**
  * 用户实体

@@ -6,9 +6,9 @@
 
 <struts>
 
-    <package name="default" namespace="/" extends="struts-default">
-    </package>
+    <package name="upper" extends="struts-default" namespace="/upper">
 
-    <include file="/upper-struts.xml"></include>
-    <include file="/chat-struts.xml"></include>
+        <action name="login" class="com.chatonline.master.upper.controller.LoginAction" method="execute">
+        </action>
+    </package>
 </struts>

@@ -16,6 +16,7 @@
             <file>file://$MODULE_DIR$/src/struts.xml</file>
             <file>jar://D:/development_environment/SH/struts2-core-2.3.32.jar!/struts-default.xml</file>
           </fileset>
+          <fileset id="s2fileset2" name="My Fileset " removed="false" />
           <propertiesKeys disabled="false" />
         </configuration>
       </facet>
@@ -29,5 +30,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Struts 2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.14" level="application_server_libraries" />
+    <orderEntry type="library" name="gson" level="project" />
   </component>
 </module>
