@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="Struts 2" type="struts2">
+    <CLASSES>
+      <root url="jar://D:/development_environment/SH/asm-3.3.jar!/" />
+      <root url="jar://D:/development_environment/SH/asm-commons-3.3.jar!/" />
+      <root url="jar://D:/development_environment/SH/asm-tree-3.3.jar!/" />
+      <root url="jar://D:/development_environment/SH/commons-fileupload-1.3.2.jar!/" />
+      <root url="jar://D:/development_environment/SH/commons-io-2.2.jar!/" />
+      <root url="jar://D:/development_environment/SH/commons-lang3-3.2.jar!/" />
+      <root url="jar://D:/development_environment/SH/freemarker-2.3.22.jar!/" />
+      <root url="jar://D:/development_environment/SH/javassist-3.11.0.GA.jar!/" />
+      <root url="jar://D:/development_environment/SH/log4j-api-2.3.jar!/" />
+      <root url="jar://D:/development_environment/SH/log4j-core-2.3.jar!/" />
+      <root url="jar://D:/development_environment/SH/ognl-3.0.19.jar!/" />
+      <root url="jar://D:/development_environment/SH/struts2-core-2.3.32.jar!/" />
+      <root url="jar://D:/development_environment/SH/xwork-core-2.3.32.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
