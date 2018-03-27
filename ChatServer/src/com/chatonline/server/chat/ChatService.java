@@ -1,32 +1,40 @@
 package com.chatonline.server.chat;
 
+import org.apache.mina.core.service.IoAcceptor;
+import org.apache.mina.core.session.IdleStatus;
+import org.apache.mina.filter.codec.ProtocolCodecFilter;
+import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
+import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
 
-public class ChatService extends Thread{
+public class ChatService {
 
-    private static final int PORT = 9876;
-    private boolean configed = false;
+    public static void main(String[] args) throws IOException {
+        Context context = new Context();
+        configContext(context);
+        IoAcceptor acceptor = new NioSocketAcceptor();
+        acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
 
-    private ServerSocketChannel ssc;
-    private Selector selector;
+        acceptor.getFilterChain().addLast("codec",
+                new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
+        acceptor.setHandler(new ChatServiceHandle(context));
 
-    public void configuration() throws IOException {
-        ssc = ServerSocketChannel.open();
-        ssc.bind(new InetSocketAddress(PORT));
-        ssc.configureBlocking(false);
-        selector = Selector.open();
-        ssc.register(selector, SelectionKey.OP_ACCEPT);
-        configed = true;
+
+        acceptor.bind(new InetSocketAddress(9876));
+
     }
 
-    @Override
-    public void run() {
-        if (configed == false){
-            throw new IllegalStateException();
-        }
+    private static void configContext(Context context) {
+        context.setRoomCount(5);
+
+        ProcessHandle addHandle = new AddHandle();
+        ProcessHandle forwardHandle = new ForwardHandle();
+        ProcessHandle closeHandle = new CloseHandle();
+
+        context.registerHandle(ProcessHandle.ADD_KEY, addHandle);
+        context.registerHandle(ProcessHandle.FORWARD_KEY, forwardHandle);
+        context.registerHandle(ProcessHandle.CLOSE_KEY, closeHandle);
     }
 }

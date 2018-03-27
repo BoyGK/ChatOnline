@@ -3,12 +3,11 @@ package com.chatonline.server.test;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 
-import java.util.Random;
 import java.util.Vector;
 
-public class ServerHandle extends IoHandlerAdapter{
+public class ServerObjectHandle extends IoHandlerAdapter {
     private Vector<ChatRoom> rooms;
-    public ServerHandle(Vector<ChatRoom> rooms){
+    public ServerObjectHandle(Vector<ChatRoom> rooms){
         this.rooms = rooms;
     }
     @Override
@@ -22,7 +21,6 @@ public class ServerHandle extends IoHandlerAdapter{
     public void sessionOpened(IoSession session) throws Exception {
         System.out.println("server session opened");
 
-        super.sessionOpened(session);
     }
 
     @Override
@@ -33,30 +31,19 @@ public class ServerHandle extends IoHandlerAdapter{
 
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
+        System.out.println("get message");
         UserSession userSession = (UserSession) session.getAttribute("session");
-        String str = message.toString();
-        System.out.println("received message: " + str);
-        String[] splits = str.split("-");
-
-        switch (splits[0]){
+        SendBody body = (SendBody) message;
+        System.out.println("received message: " + body.getKey() + " " + body.getData());
+        int id = Integer.valueOf(body.getData());
+        switch (body.getKey()){
             case "add":
-                int id = Integer.valueOf(splits[1]);
                 userSession.setRoomId(id);
                 rooms.get(id).addUser(userSession);
-                System.out.println("add chat room :" + id);
                 break;
             case "message":
-                rooms.get(userSession.getRoomId()).forward(splits[1]);
-                System.out.println("send message :" + splits[1]);
-                break;
+                rooms.get(userSession.getRoomId()).forward(body.getData());
         }
-
-        if (str.endsWith("quit")) {
-            session.close(true);
-            return;
-        }
-
-
     }
 
 

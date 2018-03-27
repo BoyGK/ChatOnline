@@ -1,35 +1,36 @@
 package com.chatonline.server.chat;
 
-import java.nio.channels.SocketChannel;
+import org.apache.mina.core.session.IoSession;
 
 public class User {
-    private SocketChannel mSocketChannel;
-    private String nickName;
-    private int id;
+    private IoSession realSession;
+    private String name;
     private String token;
+    private int roomId;
+    transient private String lastMsg;
 
-    public SocketChannel getmSocketChannel() {
-        return mSocketChannel;
+    public String getLastMsg() {
+        return lastMsg;
     }
 
-    public void setmSocketChannel(SocketChannel mSocketChannel) {
-        this.mSocketChannel = mSocketChannel;
+    public void setLastMsg(String lastMsg) {
+        this.lastMsg = lastMsg;
     }
 
-    public String getNickName() {
-        return nickName;
+    public IoSession getRealSession() {
+        return realSession;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setRealSession(IoSession realSession) {
+        this.realSession = realSession;
     }
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getToken() {
@@ -38,5 +39,13 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 }

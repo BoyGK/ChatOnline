@@ -9,6 +9,6 @@ public class Main {
     private ChatService cService;
     private RpcService rService;
     public static void main(String[] args){
-        IoAcceptor acceptor = new NioSocketAcceptor();
+
     }
 }
