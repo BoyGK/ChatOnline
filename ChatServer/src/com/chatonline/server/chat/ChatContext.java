@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-public class Context {
+public class ChatContext {
     private Map<String, ProcessHandle> handles = new HashMap<>();
     private Vector<ChatRoom> rooms;
 

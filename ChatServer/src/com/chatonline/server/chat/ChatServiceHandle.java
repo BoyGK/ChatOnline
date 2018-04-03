@@ -5,10 +5,10 @@ import org.apache.mina.core.session.IoSession;
 
 public class ChatServiceHandle extends IoHandlerAdapter {
 
-    private Context mContext;
+    private ChatContext mChatContext;
 
-    public ChatServiceHandle(Context context) {
-        mContext = context;
+    public ChatServiceHandle(ChatContext chatContext) {
+        mChatContext = chatContext;
     }
 
     @Override
@@ -36,8 +36,8 @@ public class ChatServiceHandle extends IoHandlerAdapter {
         String key = body.getKey();
         User user = (User) session.getAttribute("user");
         user.setLastMsg(body.getData());
-        System.out.println(mContext.getHandle(key) == null);
-        mContext.getHandle(key).handle(mContext,user);
+        System.out.println(mChatContext.getHandle(key) == null);
+        mChatContext.getHandle(key).handle(mChatContext,user);
 
     }
 

@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SendBody implements Serializable{
+public class SendBody implements Serializable {
 
     private String key;
     private String msg;
 
     private String data;
-    private Map<String,String> map = new HashMap<>();
+    private Map<String, String> map = new HashMap<>();
 
     public Map<String, String> getMap() {
         return map;
@@ -42,5 +42,11 @@ public class SendBody implements Serializable{
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return key + "\n" + msg + "\n" + data + "\n"
+                + map.toString();
     }
 }

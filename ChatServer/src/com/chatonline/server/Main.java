@@ -6,9 +6,12 @@ import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
 public class Main {
-    private ChatService cService;
-    private RpcService rService;
+    private static ChatService cService;
+    private static RpcService rService;
     public static void main(String[] args){
-
+        cService = new ChatService();
+        cService.start();
+        rService = new RpcService(cService);
+        rService.start();
     }
 }

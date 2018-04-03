@@ -9,32 +9,47 @@ import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-public class ChatService {
+public class ChatService extends Thread{
 
-    public static void main(String[] args) throws IOException {
-        Context context = new Context();
-        configContext(context);
+    private ChatContext chatContext;
+    public ChatService(){
+        chatContext = new ChatContext();
+        configContext(chatContext);
+    }
+    public void run()  {
+
         IoAcceptor acceptor = new NioSocketAcceptor();
         acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
 
         acceptor.getFilterChain().addLast("codec",
                 new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
-        acceptor.setHandler(new ChatServiceHandle(context));
+        acceptor.setHandler(new ChatServiceHandle(chatContext));
 
-
-        acceptor.bind(new InetSocketAddress(9876));
+        try {
+            acceptor.bind(new InetSocketAddress(9876));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    private static void configContext(Context context) {
-        context.setRoomCount(5);
+    private void configContext(ChatContext chatContext) {
+        chatContext.setRoomCount(5);
 
         ProcessHandle addHandle = new AddHandle();
         ProcessHandle forwardHandle = new ForwardHandle();
         ProcessHandle closeHandle = new CloseHandle();
 
-        context.registerHandle(ProcessHandle.ADD_KEY, addHandle);
-        context.registerHandle(ProcessHandle.FORWARD_KEY, forwardHandle);
-        context.registerHandle(ProcessHandle.CLOSE_KEY, closeHandle);
+        chatContext.registerHandle(ProcessHandle.ADD_KEY, addHandle);
+        chatContext.registerHandle(ProcessHandle.FORWARD_KEY, forwardHandle);
+        chatContext.registerHandle(ProcessHandle.CLOSE_KEY, closeHandle);
+    }
+
+    public ChatContext getChatContext() {
+        return chatContext;
+    }
+
+    public void setChatContext(ChatContext chatContext) {
+        this.chatContext = chatContext;
     }
 }
