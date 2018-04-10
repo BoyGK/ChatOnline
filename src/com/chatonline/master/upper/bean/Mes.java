@@ -6,6 +6,7 @@ public class Mes {
     private Integer state;
     private String token;
 
+
     public Mes(String msg, Integer state) {
         this.msg = msg;
         this.state = state;
