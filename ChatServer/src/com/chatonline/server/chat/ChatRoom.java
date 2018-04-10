@@ -1,14 +1,10 @@
 package com.chatonline.server.chat;
 
-import com.chatonline.server.test.UserSession;
-
-import java.io.IOException;
-import java.nio.channels.Selector;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
-public class ChatRoom {
+public class ChatRoom implements Serializable{
 
     public static final int MAX_USER = 30;
     private int roomNo = -1;
@@ -21,7 +17,7 @@ public class ChatRoom {
     }
 
     public boolean isFull() {
-        return allUser.size() >= 30 ? true : false;
+        return allUser.size() >= MAX_USER ? true : false;
     }
 
     public void registerUser(User user) {
