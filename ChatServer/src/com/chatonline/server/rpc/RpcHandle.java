@@ -2,10 +2,12 @@ package com.chatonline.server.rpc;
 
 import com.chatonline.server.bean.RpcConfig;
 import com.chatonline.server.bean.SendBody;
+import com.chatonline.server.chat.ChatRoom;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class RpcHandle extends IoHandlerAdapter {
 
@@ -33,8 +35,13 @@ public class RpcHandle extends IoHandlerAdapter {
 
         Class c = Class.forName(rpcConfig.getClazz());
         Object o = context.getImpl(c);
-        Method method = o.getClass().getMethod(rpcConfig.getMethod());
-        SendBody body = (SendBody)method.invoke(o,rpcConfig.getArguments());
+        Method method = o.getClass().getMethod(rpcConfig.getMethod(),rpcConfig.getParameterTypes());
+        List<ChatRoom> body = null;
+        if (rpcConfig.getParameterTypes() == null){
+            body = (List<ChatRoom>) method.invoke(o);
+        }else {
+            body = (List<ChatRoom>) method.invoke(o, rpcConfig.getArguments());
+        }
         System.out.println(body==null?true:false);
         session.write(body);
 

@@ -6,8 +6,8 @@ public class RpcConfig implements Serializable{
 
     private String clazz;
     private String method;
-    private String[] parameterTypes;
-    private String[] arguments;
+    private Class[] parameterTypes;
+    private Object[] arguments;
 
     public String getClazz() {
         return clazz;
@@ -25,19 +25,20 @@ public class RpcConfig implements Serializable{
         this.method = method;
     }
 
-    public String[] getParameterTypes() {
+
+    public Class[] getParameterTypes() {
         return parameterTypes;
     }
 
-    public void setParameterTypes(String[] parameterTypes) {
+    public void setParameterTypes(Class[] parameterTypes) {
         this.parameterTypes = parameterTypes;
     }
 
-    public String[] getArguments() {
+    public Object[] getArguments() {
         return arguments;
     }
 
-    public void setArguments(String[] arguments) {
+    public void setArguments(Object[] arguments) {
         this.arguments = arguments;
     }
 }

@@ -49,4 +49,11 @@ public class ChatRoom {
         return roomNo;
     }
 
+    public List<User> getAllUser() {
+        return allUser;
+    }
+
+    public void setAllUser(List<User> allUser) {
+        this.allUser = allUser;
+    }
 }

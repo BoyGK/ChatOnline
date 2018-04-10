@@ -2,6 +2,7 @@ package com.chatonline.server.test;
 
 import com.chatonline.server.bean.RpcConfig;
 import com.chatonline.server.bean.SendBody;
+import com.chatonline.server.chat.ChatRoom;
 import com.chatonline.server.rpcinterface.IChatManager;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.service.IoConnector;
@@ -13,6 +14,7 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
+import java.util.List;
 
 public class RpcTest {
 
@@ -46,6 +48,7 @@ public class RpcTest {
             e.printStackTrace();
         }
         config.setMethod(method.getName());
+        config.setParameterTypes(null);
         config.setArguments(null);
         System.out.println("before send");
         session.write(config);
@@ -64,7 +67,7 @@ public class RpcTest {
         public void messageReceived(IoSession session, Object message) throws Exception {
             super.messageReceived(session, message);
             System.out.println("re");
-            SendBody sendBody = (SendBody) message;
+            List<ChatRoom> sendBody = (List<ChatRoom>) message;
             System.out.println("sendBody "+ sendBody);
         }
 
