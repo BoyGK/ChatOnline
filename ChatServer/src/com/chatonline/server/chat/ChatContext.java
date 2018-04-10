@@ -1,19 +1,17 @@
 package com.chatonline.server.chat;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 public class ChatContext {
     private Map<String, ProcessHandle> handles = new HashMap<>();
-    private Vector<ChatRoom> rooms;
+    private List<ChatRoom> rooms;
 
-    public Vector<ChatRoom> getRooms() {
+    public List<ChatRoom> getRooms() {
         return rooms;
     }
 
     public void setRoomCount(int count) {
-        rooms = new Vector<>();
+        rooms = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             rooms.add(new ChatRoom(i));
         }

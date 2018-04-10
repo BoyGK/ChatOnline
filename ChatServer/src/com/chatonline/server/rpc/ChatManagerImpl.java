@@ -1,8 +1,11 @@
 package com.chatonline.server.rpc;
 
 import com.chatonline.server.chat.ChatContext;
-import com.chatonline.server.chat.SendBody;
+import com.chatonline.server.bean.SendBody;
+import com.chatonline.server.chat.ChatRoom;
 import com.chatonline.server.rpcinterface.IChatManager;
+
+import java.util.List;
 
 public class ChatManagerImpl implements IChatManager {
 
@@ -13,11 +16,7 @@ public class ChatManagerImpl implements IChatManager {
     }
 
     @Override
-    public SendBody getChatRoomsInfo() {
-        SendBody body = new SendBody();
-        /**
-         * (未实现)填充body
-         */
-        return body;
+    public List<ChatRoom> getChatRoomsInfo() {
+        return chatContext.getRooms();
     }
 }

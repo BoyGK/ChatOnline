@@ -1,5 +1,6 @@
 package com.chatonline.server.test;
 
+import com.chatonline.server.bean.SendBody;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.service.IoConnector;
 import org.apache.mina.core.session.IoSession;
@@ -28,7 +29,7 @@ public class Client {
         while (cin.hasNext()) {
             String cmd = cin.nextLine();
             String[] split = cmd.split("-");
-            com.chatonline.server.chat.SendBody body = new com.chatonline.server.chat.SendBody();
+            SendBody body = new SendBody();
             body.setKey(split[0]);
             body.setData(split[1]);
             session.write(body);

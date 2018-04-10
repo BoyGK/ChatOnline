@@ -1,7 +1,7 @@
 package com.chatonline.server.rpc;
 
 import com.chatonline.server.bean.RpcConfig;
-import com.chatonline.server.chat.SendBody;
+import com.chatonline.server.bean.SendBody;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 

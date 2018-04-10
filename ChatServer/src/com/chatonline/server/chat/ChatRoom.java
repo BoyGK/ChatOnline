@@ -13,7 +13,7 @@ public class ChatRoom {
     public static final int MAX_USER = 30;
     private int roomNo = -1;
 
-    private Vector<User> allUser = new Vector<>();
+    private List<User> allUser = new ArrayList<>();
 
 
     public ChatRoom(int id) {

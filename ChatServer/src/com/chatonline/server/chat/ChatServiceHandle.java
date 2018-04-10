@@ -1,5 +1,6 @@
 package com.chatonline.server.chat;
 
+import com.chatonline.server.bean.SendBody;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 

@@ -1,4 +1,4 @@
-package com.chatonline.server.chat;
+package com.chatonline.server.bean;
 
 import java.io.Serializable;
 import java.util.HashMap;

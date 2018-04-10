@@ -1,7 +1,7 @@
 package com.chatonline.server.test;
 
 import com.chatonline.server.bean.RpcConfig;
-import com.chatonline.server.chat.SendBody;
+import com.chatonline.server.bean.SendBody;
 import com.chatonline.server.rpcinterface.IChatManager;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.service.IoConnector;

@@ -1,8 +1,6 @@
 package com.chatonline.server.bean;
 
 import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.List;
 
 public class RpcConfig implements Serializable{
 
