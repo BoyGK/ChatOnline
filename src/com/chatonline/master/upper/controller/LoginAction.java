@@ -32,7 +32,7 @@ public class LoginAction extends ActionSupport {
     public String execute() throws Exception {
         UserService service = new UserService();
         if (service.login(getUsername(), getPassword())) {
-            Out.writer().print(new Gson().toJson(new Mes("", 1, CreateTokenFactory.getRandomString())));
+            Out.writer().print(new Gson().toJson(service.forResult()));
         }else {
             Out.writer().print(new Gson().toJson(new Mes("用户名或密码错误!!!", 0, "")));
         }

@@ -33,7 +33,10 @@ public class RpcHandle extends IoHandlerAdapter {
         System.out.println("rpc handle received msg");
         RpcConfig rpcConfig = (RpcConfig) message;
 
-        Class c = Class.forName(rpcConfig.getClazz());
+        //System.out.println(rpcConfig.getClazz());
+        String name = rpcConfig.getClazz().replaceAll("master","server");
+        System.out.println(name);
+        Class c = Class.forName(name);
         Object o = context.getImpl(c);
         Method method = o.getClass().getMethod(rpcConfig.getMethod(),rpcConfig.getParameterTypes());
         List<ChatRoom> body = null;

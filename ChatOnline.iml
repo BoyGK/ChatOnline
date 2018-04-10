@@ -35,5 +35,6 @@
     <orderEntry type="library" name="mina-core-2.0.17" level="project" />
     <orderEntry type="library" name="libs1" level="project" />
     <orderEntry type="library" name="mina-core-2.0.17" level="project" />
+    <orderEntry type="module" module-name="ChatServer" />
   </component>
 </module>
