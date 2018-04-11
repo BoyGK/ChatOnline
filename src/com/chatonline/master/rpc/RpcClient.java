@@ -17,9 +17,9 @@ import java.util.List;
 
 public class RpcClient {
 
-    Object object = null;
+    Object object = new Object();
 
-    public synchronized Object rpc(String ip, int port, String methodName, String interfaceName, Object... args) {
+    public synchronized Object rpc(String ip, int port, String methodName, String interfaceName, Object... args)  {
         IoConnector connector = new NioSocketConnector();
         connector.getFilterChain().addLast("codec",
                 new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
@@ -43,6 +43,7 @@ public class RpcClient {
         config.setMethod(methodName);
         config.setArguments(args);
         session.write(config);
+
         while (object == null) {
             try {
                 Thread.sleep(100);
