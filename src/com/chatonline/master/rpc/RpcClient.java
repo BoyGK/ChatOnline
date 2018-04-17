@@ -44,13 +44,14 @@ public class RpcClient {
         config.setArguments(args);
         session.write(config);
 
-        while (object == null) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+       object = new Object();
+       synchronized (object){
+           try {
+               object.wait();
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+       }
         return object;
     }
 
@@ -64,6 +65,11 @@ public class RpcClient {
         @Override
         public void messageReceived(IoSession session, Object message) throws Exception {
             call.call(message);
+        }
+
+        @Override
+        public void messageSent(IoSession session, Object message) throws Exception {
+            object.notifyAll();
         }
     }
 

@@ -36,5 +36,6 @@
     <orderEntry type="library" name="libs1" level="project" />
     <orderEntry type="library" name="mina-core-2.0.17" level="project" />
     <orderEntry type="module" module-name="ChatServer" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.16" level="application_server_libraries" />
   </component>
 </module>

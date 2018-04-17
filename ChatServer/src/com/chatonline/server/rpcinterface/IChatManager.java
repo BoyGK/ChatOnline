@@ -8,5 +8,5 @@ public interface IChatManager {
 
     List<ChatRoom> getChatRoomsInfo();
 
-
+    boolean initChatRooms(int count,int startId);
 }
