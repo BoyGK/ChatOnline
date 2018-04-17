@@ -1,10 +1,7 @@
 package com.chatonline.master.rpc;
 
 import com.chatonline.server.bean.RpcConfig;
-import com.chatonline.server.chat.ChatRoom;
 import org.apache.mina.core.future.ConnectFuture;
-import org.apache.mina.core.future.ReadFuture;
-import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.service.IoConnector;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
@@ -17,42 +14,30 @@ import java.util.List;
 
 public class RpcClient {
 
-    Object object = new Object();
+    Object object = null;
 
-    public synchronized Object rpc(String ip, int port, String methodName, String interfaceName, Object... args)  {
+    public synchronized List rpc(String ip, int port, String methodName, String interfaceName, Object... args) {
         IoConnector connector = new NioSocketConnector();
         connector.getFilterChain().addLast("codec",
                 new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
-        connector.setHandler(new RpcClient().new MyHandle(new Call() {
-            @Override
-            public void call(Object o) {
-                object = o;
-            }
-        }));
+        connector.setHandler(new RpcClient().new MyHandle(o -> object = o));
         ConnectFuture future = connector.connect(new InetSocketAddress(ip, port));
         future.awaitUninterruptibly();
         IoSession session = future.getSession();
         RpcConfig config = new RpcConfig();
         config.setClazz(interfaceName);
-//        Method method = null;
-//        try {
-//            method = IChatManager.class.getMethod(methodName);
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//        }
         config.setMethod(methodName);
         config.setArguments(args);
         session.write(config);
 
-       object = new Object();
-       synchronized (object){
-           try {
-               object.wait();
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-       }
-        return object;
+        while (object == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return (List) object;
     }
 
     private class MyHandle extends IoHandlerAdapter {
@@ -65,11 +50,6 @@ public class RpcClient {
         @Override
         public void messageReceived(IoSession session, Object message) throws Exception {
             call.call(message);
-        }
-
-        @Override
-        public void messageSent(IoSession session, Object message) throws Exception {
-            object.notifyAll();
         }
     }
 
