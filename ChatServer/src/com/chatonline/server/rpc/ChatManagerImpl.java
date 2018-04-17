@@ -22,7 +22,7 @@ public class ChatManagerImpl implements IChatManager {
     }
 
     @Override
-    public boolean initChatRooms(int count, int startId) {
+    public boolean initChatRooms(Integer count, Integer startId) {
         try {
             chatContext.setRoomCount(count, startId);
             System.out.println("config rooms from service");

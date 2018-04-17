@@ -13,7 +13,8 @@ public class Application extends HttpServlet {
         super.init();
         new Thread(() -> {
             RpcClient client = new RpcClient();
-            client.rpc("183.175.12.154", 6789, "initChatRooms", IChatManager.class.getName(), 10, 1);
+            client.rpc("127.0.0.1", 6789, "initChatRooms",
+                    IChatManager.class.getName(), new Class[]{Integer.class,Integer.class}, 20, 1);
         }).start();
 
     }

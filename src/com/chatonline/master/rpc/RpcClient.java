@@ -16,7 +16,7 @@ public class RpcClient {
 
     Object object = null;
 
-    public synchronized List rpc(String ip, int port, String methodName, String interfaceName, Object... args) {
+    public synchronized Object rpc(String ip, int port, String methodName, String interfaceName, Class[] parameters, Object... args) {
         IoConnector connector = new NioSocketConnector();
         connector.getFilterChain().addLast("codec",
                 new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
@@ -25,6 +25,7 @@ public class RpcClient {
         future.awaitUninterruptibly();
         IoSession session = future.getSession();
         RpcConfig config = new RpcConfig();
+        config.setParameterTypes(parameters);
         config.setClazz(interfaceName);
         config.setMethod(methodName);
         config.setArguments(args);
@@ -37,7 +38,7 @@ public class RpcClient {
                 e.printStackTrace();
             }
         }
-        return (List) object;
+        return object;
     }
 
     private class MyHandle extends IoHandlerAdapter {

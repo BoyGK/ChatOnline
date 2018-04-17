@@ -1,13 +1,10 @@
 package com.chatonline.server.rpc;
 
 import com.chatonline.server.bean.RpcConfig;
-import com.chatonline.server.bean.SendBody;
-import com.chatonline.server.chat.ChatRoom;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 
 import java.lang.reflect.Method;
-import java.util.List;
 
 public class RpcHandle extends IoHandlerAdapter {
 
@@ -28,23 +25,26 @@ public class RpcHandle extends IoHandlerAdapter {
     }
 
     @Override
-    public void messageReceived(IoSession session, Object message) throws Exception {
-        super.messageReceived(session, message);
-        System.out.println("rpc handle received msg");
-        RpcConfig rpcConfig = (RpcConfig) message;
-        String name = rpcConfig.getClazz().replaceAll("master", "server");
-        System.out.println(name);
-        Class c = Class.forName(name);
-        Object o = context.getImpl(c);
-        Method method = o.getClass().getMethod(rpcConfig.getMethod(), rpcConfig.getParameterTypes());
-        Object resObj = null;
-        if (rpcConfig.getParameterTypes() == null) {
-            resObj = method.invoke(o);
-        } else {
-            resObj = method.invoke(o, rpcConfig.getArguments());
+    public void messageReceived(IoSession session, Object message) {
+        try {
+            System.out.println("rpc handle received msg");
+            RpcConfig rpcConfig = (RpcConfig) message;
+            String name = rpcConfig.getClazz().replaceAll("master", "server");
+            System.out.println(name);
+            Class c = Class.forName(name);
+            Object o = context.getImpl(c);
+            Method method = o.getClass().getMethod(rpcConfig.getMethod(), rpcConfig.getParameterTypes());
+            Object resObj = null;
+            if (rpcConfig.getParameterTypes() == null) {
+                resObj = method.invoke(o);
+            } else {
+                resObj = method.invoke(o, rpcConfig.getArguments());
+            }
+            System.out.println(resObj == null ? true : false);
+            session.write(resObj);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println(resObj == null ? true : false);
-        session.write(resObj);
 
     }
 

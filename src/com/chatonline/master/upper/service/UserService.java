@@ -28,8 +28,8 @@ public class UserService {
         saveToken(token);
 
         RpcClient client = new RpcClient();
-        List<ChatRoom> rooms = (List<ChatRoom>) client.rpc(
-                "183.175.12.154", 6789, "getChatRoomsInfo", IChatManager.class.getName(), null);
+        List<ChatRoom> rooms = (List<ChatRoom>) client.rpc("127.0.0.1", 6789, "getChatRoomsInfo",
+                IChatManager.class.getName(), null,null);
         Mes mes = new Mes("Success", 1, token);
         mes.setTargetIp("127.0.0.1");
         List<Room> roomList = new ArrayList<>();
