@@ -32,21 +32,19 @@ public class RpcHandle extends IoHandlerAdapter {
         super.messageReceived(session, message);
         System.out.println("rpc handle received msg");
         RpcConfig rpcConfig = (RpcConfig) message;
-
-        //System.out.println(rpcConfig.getClazz());
-        String name = rpcConfig.getClazz().replaceAll("master","server");
+        String name = rpcConfig.getClazz().replaceAll("master", "server");
         System.out.println(name);
         Class c = Class.forName(name);
         Object o = context.getImpl(c);
-        Method method = o.getClass().getMethod(rpcConfig.getMethod(),rpcConfig.getParameterTypes());
-        List<ChatRoom> body = null;
-        if (rpcConfig.getParameterTypes() == null){
-            body = (List<ChatRoom>) method.invoke(o);
-        }else {
-            body = (List<ChatRoom>) method.invoke(o, rpcConfig.getArguments());
+        Method method = o.getClass().getMethod(rpcConfig.getMethod(), rpcConfig.getParameterTypes());
+        Object resObj = null;
+        if (rpcConfig.getParameterTypes() == null) {
+            resObj = method.invoke(o);
+        } else {
+            resObj = method.invoke(o, rpcConfig.getArguments());
         }
-        System.out.println(body==null?true:false);
-        session.write(body);
+        System.out.println(resObj == null ? true : false);
+        session.write(resObj);
 
     }
 

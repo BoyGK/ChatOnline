@@ -4,14 +4,13 @@ import java.util.*;
 
 public class ChatContext {
     private Map<String, ProcessHandle> handles = new HashMap<>();
-    private List<ChatRoom> rooms;
+    private List<ChatRoom> rooms = new ArrayList<>();
 
     public List<ChatRoom> getRooms() {
         return rooms;
     }
 
-    public void setRoomCount(int count) {
-        rooms = new ArrayList<>();
+    public void setRoomCount(int count,int startId) {
         for (int i = 0; i < count; i++) {
             rooms.add(new ChatRoom(i));
         }

@@ -34,7 +34,7 @@ public class ChatService extends Thread{
     }
 
     private void configContext(ChatContext chatContext) {
-        chatContext.setRoomCount(5);
+        chatContext.setRoomCount(5,0);
 
         ProcessHandle addHandle = new AddHandle();
         ProcessHandle forwardHandle = new ForwardHandle();
