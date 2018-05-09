@@ -14,9 +14,9 @@
         <configuration>
           <fileset id="s2fileset" name="Default File Set " removed="false">
             <file>file://$MODULE_DIR$/src/struts.xml</file>
-            <file>jar://D:/development_environment/SH/struts2-core-2.3.32.jar!/struts-default.xml</file>
+            <file>jar://$MODULE_DIR$/../libs/struts2-core-2.3.32.jar!/struts-default.xml</file>
+            <file>file://$MODULE_DIR$/src/upper-struts.xml</file>
           </fileset>
-          <fileset id="s2fileset2" name="My Fileset " removed="false" />
           <propertiesKeys disabled="false" />
         </configuration>
       </facet>
@@ -29,14 +29,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Struts 2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.14" level="application_server_libraries" />
-    <orderEntry type="library" name="gson" level="project" />
-    <orderEntry type="library" name="mina-core-2.0.17" level="project" />
     <orderEntry type="library" name="libs1" level="project" />
-    <orderEntry type="library" name="mina-core-2.0.17" level="project" />
-    <orderEntry type="module" module-name="ChatServer" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.16" level="application_server_libraries" />
-    <orderEntry type="library" name="Hibernate 5.2.16-5.2.16" level="project" />
+    <orderEntry type="module" module-name="ChatServer" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
