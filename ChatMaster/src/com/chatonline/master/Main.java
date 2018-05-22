@@ -7,6 +7,7 @@ import com.chatonline.master.upper.util.CreateTokenFactory;
 public class Main {
 
     public static void main(String... args){
+
 //        UserDao dao = new UserDao();
 //        User user = new User();
 //        user.setId(2);
