@@ -5,6 +5,7 @@ import com.chatonline.master.rpcinterface.IChatManager;
 import com.chatonline.master.upper.bean.Mes;
 import com.chatonline.master.upper.bean.Room;
 import com.chatonline.master.upper.bean.User;
+import com.chatonline.master.upper.dao.Dao;
 import com.chatonline.master.upper.dao.UserDao;
 import com.chatonline.master.upper.util.CreateTokenFactory;
 import com.chatonline.server.chat.ChatRoom;
@@ -15,8 +16,8 @@ import java.util.List;
 public class UserService {
 
     public boolean login(String user, String pass) {
-        UserDao dao = new UserDao();
-        User u = dao.query(user);
+        Dao dao = new UserDao();
+        User u = (User) dao.query(user);
         if (u != null && u.getPassword().equals(pass)) {
             return true;
         }

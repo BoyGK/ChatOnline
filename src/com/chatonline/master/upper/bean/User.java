@@ -1,31 +1,72 @@
 package com.chatonline.master.upper.bean;
 
-/**
- * 用户实体
- */
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Objects;
+
+@Entity
 public class User {
-
-    private String uesranme;
+    private int id;
+    private String username;
     private String password;
+    private String name;
 
-    public User(String uesranme, String password) {
-        this.uesranme = uesranme;
-        this.password = password;
+    @Id
+    @Column(name = "id")
+    public int getId() {
+        return id;
     }
 
-    public String getUesranme() {
-        return uesranme;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUesranme(String uesranme) {
-        this.uesranme = uesranme;
+    @Basic
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Basic
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        User user = (User) object;
+        return id == user.id &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(name, user.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, username, password, name);
     }
 }
