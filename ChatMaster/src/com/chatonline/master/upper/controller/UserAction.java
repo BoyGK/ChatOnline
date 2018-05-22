@@ -1,16 +1,16 @@
 package com.chatonline.master.upper.controller;
 
 import com.chatonline.master.upper.bean.ResultModel;
-import com.chatonline.master.upper.bean.User;
 import com.chatonline.master.upper.service.Out;
 import com.chatonline.master.upper.service.UserService;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class LoginAction extends ActionSupport {
+public class UserAction extends ActionSupport {
 
     private String username;
-    private String password;
+    private String token;
+    private String new_name;
 
     public String getUsername() {
         return username;
@@ -20,22 +20,30 @@ public class LoginAction extends ActionSupport {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getToken() {
+        return token;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getNew_name() {
+        return new_name;
+    }
+
+    public void setNew_name(String new_name) {
+        this.new_name = new_name;
     }
 
     @Override
     public String execute() throws Exception {
         UserService service = new UserService();
-        User user = service.login(getUsername(), getPassword());
-        if (user != null) {
-            Out.writer().print(new Gson().toJson(service.forResult(user)));
+        ResultModel re = service.change(getUsername(), getToken(), getNew_name());
+        if (re != null) {
+            Out.writer().print(new Gson().toJson(re));
         } else {
-            Out.writer().print(new Gson().toJson(new ResultModel("登录失败", 0)));
+            Out.writer().print(new Gson().toJson(new ResultModel("该用户不存在", 0)));
         }
         return null;
     }

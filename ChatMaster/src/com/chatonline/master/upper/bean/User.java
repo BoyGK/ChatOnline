@@ -4,14 +4,15 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Objects;
+import java.io.Serializable;
 
 @Entity
-public class User {
+public class User implements Serializable{
     private int id;
     private String username;
     private String password;
-    private String name;
+    private String nickname;
+    private String token;
 
     @Id
     @Column(name = "id")
@@ -44,29 +45,22 @@ public class User {
     }
 
     @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
+    @Column(name = "nickname")
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        User user = (User) object;
-        return id == user.id &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(name, user.name);
+    @Basic
+    @Column(name = "token")
+    public String getToken() {
+        return token;
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, username, password, name);
+    public void setToken(String token) {
+        this.token = token;
     }
 }

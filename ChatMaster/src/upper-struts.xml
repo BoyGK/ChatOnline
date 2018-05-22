@@ -10,5 +10,14 @@
 
         <action name="login" class="com.chatonline.master.upper.controller.LoginAction" method="execute">
         </action>
+
+        <action name="register" class="com.chatonline.master.upper.controller.RegisterAction" method="execute">
+        </action>
+
+        <action name="change_name" class="com.chatonline.master.upper.controller.UserAction" method="execute">
+        </action>
+
+        <action name="add_room" class="com.chatonline.master.upper.controller.AddRoomAction" method="execute">
+        </action>
     </package>
 </struts>

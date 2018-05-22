@@ -2,39 +2,18 @@ package com.chatonline.master.upper.bean;
 
 import java.util.List;
 
-public class Mes {
-
+public class LoginModel {
     private String msg;
     private Integer state;
     private String token;
-    private String targetIp;
+    private String nickname;
     private List<Room> rooms;
 
-
-    public Mes(String msg, Integer state) {
-        this.msg = msg;
-        this.state = state;
-    }
-
-    public Mes(String msg, Integer state, String token) {
+    public LoginModel(String msg, Integer state, String token, String nickname, List<Room> rooms) {
         this.msg = msg;
         this.state = state;
         this.token = token;
-    }
-
-    public String getTargetIp() {
-        return targetIp;
-    }
-
-    public void setTargetIp(String targetIp) {
-        this.targetIp = targetIp;
-    }
-
-    public List<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(List<Room> rooms) {
+        this.nickname = nickname;
         this.rooms = rooms;
     }
 
@@ -60,5 +39,21 @@ public class Mes {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 }
