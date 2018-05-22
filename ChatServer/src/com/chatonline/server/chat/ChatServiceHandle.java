@@ -28,6 +28,10 @@ public class ChatServiceHandle extends IoHandlerAdapter {
     @Override
     public void sessionClosed(IoSession session) throws Exception {
         super.sessionClosed(session);
+
+        mChatContext.getHandle(ProcessHandle.CLOSE_KEY).handle(mChatContext,
+                (User) session.getAttribute("user"));
+
     }
 
     @Override
@@ -38,7 +42,7 @@ public class ChatServiceHandle extends IoHandlerAdapter {
         User user = (User) session.getAttribute("user");
         user.setLastMsg(body.getData());
         System.out.println(mChatContext.getHandle(key) == null);
-        mChatContext.getHandle(key).handle(mChatContext,user);
+        mChatContext.getHandle(key).handle(mChatContext, user);
 
     }
 
