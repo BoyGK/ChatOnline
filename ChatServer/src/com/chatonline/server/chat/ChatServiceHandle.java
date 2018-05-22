@@ -42,7 +42,10 @@ public class ChatServiceHandle extends IoHandlerAdapter {
         User user = (User) session.getAttribute("user");
         user.setLastMsg(body.getData());
         System.out.println(mChatContext.getHandle(key) == null);
-        mChatContext.getHandle(key).handle(mChatContext, user);
+        ProcessHandle handle = mChatContext.getHandle(key);
+        if (handle != null){
+            handle.handle(mChatContext, user);
+        }
 
     }
 
