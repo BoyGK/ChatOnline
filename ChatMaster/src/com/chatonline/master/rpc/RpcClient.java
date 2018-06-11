@@ -50,7 +50,15 @@ public class RpcClient {
 
         @Override
         public void messageReceived(IoSession session, Object message) throws Exception {
+            System.out.println("get msg");
             call.call(message);
+        }
+
+        @Override
+        public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
+            super.exceptionCaught(session, cause);
+            System.out.println("有tmd异常");
+            cause.printStackTrace();
         }
     }
 

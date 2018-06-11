@@ -2,8 +2,10 @@ package com.chatonline.server.chat;
 
 import org.apache.mina.core.session.IoSession;
 
-public class User {
-    private IoSession realSession;
+import java.io.Serializable;
+
+public class User implements Serializable{
+    private transient IoSession realSession;
     private String name;
     private String token;
     private int roomId;

@@ -1,6 +1,7 @@
 package com.chatonline.server.rpc;
 
 import com.chatonline.server.bean.RpcConfig;
+import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 
@@ -42,6 +43,7 @@ public class RpcHandle extends IoHandlerAdapter {
             }
             System.out.println(resObj == null ? true : false);
             session.write(resObj);
+            System.out.println("send finish");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,10 +53,18 @@ public class RpcHandle extends IoHandlerAdapter {
     @Override
     public void messageSent(IoSession session, Object message) throws Exception {
         super.messageSent(session, message);
+        System.out.println("send");
     }
 
     @Override
     public void inputClosed(IoSession session) throws Exception {
         super.inputClosed(session);
+    }
+
+    @Override
+    public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
+        super.exceptionCaught(session, cause);
+        System.out.println("有tmd异常");
+        cause.printStackTrace();
     }
 }

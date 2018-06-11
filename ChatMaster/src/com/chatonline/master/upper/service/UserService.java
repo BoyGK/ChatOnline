@@ -17,11 +17,13 @@ import java.util.List;
 public class UserService {
 
     public User login(String username, String password) {
-        Dao dao = new UserDao();
+        System.out.println("username:"+username+"=========================");
+        UserDao dao = new UserDao();
         List<User> users = dao.query();
         dao.close();
         for (User user1 : users) {
             if (user1.getUsername().equals(username) && user1.getPassword().equals(password)) {
+                System.out.println(user1.getUsername()+"=========================");
                 return user1;
             }
         }
@@ -29,6 +31,7 @@ public class UserService {
     }
 
     public LoginModel forResult(User user) {
+        System.out.println("=========================forResult1");
         RpcClient client = new RpcClient();
         List<ChatRoom> rooms = (List<ChatRoom>) client.rpc("127.0.0.1", 6789, "getChatRoomsInfo",
                 IChatManager.class.getName(), null, null);
@@ -40,6 +43,7 @@ public class UserService {
             room1.setMaxCount(room.MAX_USER);
             roomList.add(room1);
         }
+        System.out.println("=========================forResult2");
         return new LoginModel("登陆成功", 1, user.getToken(), user.getNickname(), roomList);
     }
 

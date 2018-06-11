@@ -1,5 +1,7 @@
 package com.chatonline.server.chat;
 
+import com.shxy.chatonlineandroid.bean.ChatMessage;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,10 @@ public class ChatRoom implements Serializable{
         for (User user : allUser) {
             if (user!=from) {
                 System.out.println("to : " + user.getRealSession().getId());
-                user.getRealSession().write(from.getLastMsg());
+                ChatMessage message = new ChatMessage();
+                message.setUsername(from.getName());
+                message.setMsg(from.getLastMsg());
+                user.getRealSession().write(message);
             }
         }
     }

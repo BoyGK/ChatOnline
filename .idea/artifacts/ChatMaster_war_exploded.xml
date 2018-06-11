@@ -12,6 +12,7 @@
           <element id="library" level="project" name="libs1" />
           <element id="library" level="project" name="Hibernate 5.2.16-5.2.16" />
           <element id="library" level="project" name="lib" />
+          <element id="library" level="project" name="Hibernate" />
         </element>
       </element>
     </root>

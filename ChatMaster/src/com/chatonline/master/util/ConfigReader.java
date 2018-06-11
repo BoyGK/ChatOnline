@@ -8,15 +8,20 @@ import java.util.List;
 public class ConfigReader {
 
     public static Tar loadConfig(Integer HOUSEID) {
-        FileInputStream inputStream = null;
-        DataInputStream dataInputStream = null;
+        BufferedReader reader = null;
         try {
-            inputStream = new FileInputStream(new File("room.json"));
-            dataInputStream = new DataInputStream(inputStream);
-            String json = dataInputStream.readUTF();
-            Res rj = new Gson().fromJson(json, Res.class);
+            File file = new File("e:\\room.json");
+            System.out.println(file.getPath());
+
+            reader = new BufferedReader(new FileReader(file));
+            StringBuilder json = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                json.append(line);
+            }
+            Res rj = new Gson().fromJson(json.toString(), Res.class);
             for (Tar tar : rj.getRoom_config()) {
-                if(HOUSEID.equals(tar.getHouse_id())){
+                if (HOUSEID >= tar.from && HOUSEID < tar.to) {
                     return tar;
                 }
             }
@@ -24,10 +29,9 @@ public class ConfigReader {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                dataInputStream.close();
-                inputStream.close();
+                reader.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -48,16 +52,25 @@ public class ConfigReader {
     }
 
     public static class Tar {
-        private Integer house_id;
+        private Integer from;
+        private Integer to;
         private String target;
         private String port;
 
-        public Integer getHouse_id() {
-            return house_id;
+        public Integer getFrom() {
+            return from;
         }
 
-        public void setHouse_id(Integer house_id) {
-            this.house_id = house_id;
+        public void setFrom(Integer from) {
+            this.from = from;
+        }
+
+        public Integer getTo() {
+            return to;
+        }
+
+        public void setTo(Integer to) {
+            this.to = to;
         }
 
         public String getTarget() {

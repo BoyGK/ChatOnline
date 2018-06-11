@@ -6,19 +6,22 @@ import java.util.Map;
 
 public class SendBody implements Serializable {
 
+    private static final long serialVersionUID = 3624999999L;
     private String key;
     private String msg;
 
     private String data;
-    private Map<String, String> map = new HashMap<>();
-
-    public Map<String, String> getMap() {
-        return map;
+    public SendBody() {
     }
-
-    public void setMap(Map<String, String> map) {
-        this.map = map;
-    }
+//    private Map<String, String> map = new HashMap<>();
+//
+//    public Map<String, String> getMap() {
+//        return map;
+//    }
+//
+//    public void setMap(Map<String, String> map) {
+//        this.map = map;
+//    }
 
     public String getKey() {
         return key;
@@ -46,7 +49,6 @@ public class SendBody implements Serializable {
 
     @Override
     public String toString() {
-        return key + "\n" + msg + "\n" + data + "\n"
-                + map.toString();
+        return key + "\n" + msg + "\n" + data + "\n";
     }
 }

@@ -9,16 +9,16 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AddRoomAction extends ActionSupport {
 
-    private Integer houseid;
+    private Integer houseId;
     private String username;
     private String token;
 
-    public Integer getHouseid() {
-        return houseid;
+    public Integer getHouseId() {
+        return houseId;
     }
 
-    public void setHouseid(Integer houseid) {
-        this.houseid = houseid;
+    public void setHouseId(Integer houseId) {
+        this.houseId = houseId;
     }
 
     public String getUsername() {
@@ -40,7 +40,7 @@ public class AddRoomAction extends ActionSupport {
     @Override
     public String execute() throws Exception {
         RoomService service = new RoomService();
-        RoomModel re = service.isLogin(getHouseid(), getUsername(), getToken());
+        RoomModel re = service.isLogin(getHouseId(), getUsername(), getToken());
         if (re != null) {
             Out.writer().print(new Gson().toJson(re));
         } else {

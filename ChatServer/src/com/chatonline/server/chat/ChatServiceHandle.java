@@ -21,6 +21,7 @@ public class ChatServiceHandle extends IoHandlerAdapter {
     public void sessionOpened(IoSession session) throws Exception {
         System.out.println("conn opened");
         User user = new User();
+        user.setName("unknown");
         user.setRealSession(session);
         session.setAttribute("user", user);
     }
@@ -52,5 +53,11 @@ public class ChatServiceHandle extends IoHandlerAdapter {
     @Override
     public void messageSent(IoSession session, Object message) throws Exception {
         super.messageSent(session, message);
+    }
+    @Override
+    public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
+        super.exceptionCaught(session, cause);
+        System.out.println("异常发生" + cause);
+        cause.printStackTrace();
     }
 }

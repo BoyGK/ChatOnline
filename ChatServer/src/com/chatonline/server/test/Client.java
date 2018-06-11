@@ -22,7 +22,7 @@ public class Client {
 
         connector.setHandler(new ClientHandle());
 
-        ConnectFuture future = connector.connect(new InetSocketAddress("127.0.0.1", 9876));
+        ConnectFuture future = connector.connect(new InetSocketAddress("183.175.12.154", 9876));
         future.awaitUninterruptibly();
         IoSession session = future.getSession();
         Scanner cin = new Scanner(System.in);
