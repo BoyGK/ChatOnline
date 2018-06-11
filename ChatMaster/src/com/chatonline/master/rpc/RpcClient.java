@@ -22,6 +22,8 @@ public class RpcClient {
                 new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
         connector.setHandler(new RpcClient().new MyHandle(o -> object = o));
         ConnectFuture future = connector.connect(new InetSocketAddress(ip, port));
+        System.out.println("in rpc ip = " + ip);
+        System.out.println("in rpc port = " + ip);
         future.awaitUninterruptibly();
         IoSession session = future.getSession();
         RpcConfig config = new RpcConfig();

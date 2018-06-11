@@ -6,6 +6,7 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
@@ -52,4 +53,5 @@ public class ChatService extends Thread{
     public void setChatContext(ChatContext chatContext) {
         this.chatContext = chatContext;
     }
+
 }
