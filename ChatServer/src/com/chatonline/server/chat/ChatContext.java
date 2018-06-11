@@ -10,9 +10,9 @@ public class ChatContext {
         return rooms;
     }
 
-    public void setRoomCount(int count,int startId) {
+    public void setRoomCount(int count, int startId) {
         for (int i = 0; i < count; i++) {
-            rooms.add(new ChatRoom(i));
+            rooms.add(new ChatRoom(i + startId));
         }
     }
 
@@ -20,7 +20,7 @@ public class ChatContext {
         handles.put(key, handle);
     }
 
-    public ProcessHandle getHandle(String key){
+    public ProcessHandle getHandle(String key) {
         return handles.get(key);
     }
 }

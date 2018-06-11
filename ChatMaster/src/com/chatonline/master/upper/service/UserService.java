@@ -9,6 +9,7 @@ import com.chatonline.master.upper.bean.User;
 import com.chatonline.master.upper.dao.Dao;
 import com.chatonline.master.upper.dao.UserDao;
 import com.chatonline.master.upper.util.CreateTokenFactory;
+import com.chatonline.master.util.ConfigReader;
 import com.chatonline.server.chat.ChatRoom;
 
 import java.util.ArrayList;
@@ -33,16 +34,20 @@ public class UserService {
     public LoginModel forResult(User user) {
         System.out.println("=========================forResult1");
         RpcClient client = new RpcClient();
-        List<ChatRoom> rooms = (List<ChatRoom>) client.rpc("127.0.0.1", 6789, "getChatRoomsInfo",
-                IChatManager.class.getName(), null, null);
         List<Room> roomList = new ArrayList<>();
-        for (ChatRoom room : rooms) {
-            Room room1 = new Room();
-            room1.setHouseId(room.getRoomNo());
-            room1.setNowCount(room.getAllUser().size());
-            room1.setMaxCount(room.MAX_USER);
-            roomList.add(room1);
+        for(ConfigReader.Tar tar:ConfigReader.getServerConfig().getRoom_config()){
+            List<ChatRoom> rooms = (List<ChatRoom>) client.rpc(tar.getTarget(), 6789, "getChatRoomsInfo",
+                    IChatManager.class.getName(), null, null);
+
+            for (ChatRoom room : rooms) {
+                Room room1 = new Room();
+                room1.setHouseId(room.getRoomNo());
+                room1.setNowCount(room.getAllUser().size());
+                room1.setMaxCount(room.MAX_USER);
+                roomList.add(room1);
+            }
         }
+
         System.out.println("=========================forResult2");
         return new LoginModel("登陆成功", 1, user.getToken(), user.getNickname(), roomList);
     }

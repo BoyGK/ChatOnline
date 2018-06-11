@@ -7,6 +7,32 @@ import java.util.List;
 
 public class ConfigReader {
 
+    private static Res serverConfig = null;
+    public static Res getServerConfig(){
+        if (serverConfig == null){
+            serverConfig = getAllServerConfig();
+        }
+        return serverConfig;
+    }
+    private static ConfigReader.Res getAllServerConfig() {
+        BufferedReader reader = null;
+        StringBuilder json = null;
+        try {
+            File file = new File("e:\\room.json");
+            System.out.println(file.getPath());
+
+            reader = new BufferedReader(new FileReader(file));
+            json = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                json.append(line);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        ConfigReader.Res serverConfig = new Gson().fromJson(json.toString(), ConfigReader.Res.class);
+        return serverConfig;
+    }
     public static Tar loadConfig(Integer HOUSEID) {
         BufferedReader reader = null;
         try {
@@ -39,7 +65,7 @@ public class ConfigReader {
         return null;
     }
 
-    static class Res {
+    public static class Res {
         private List<Tar> room_config;
 
         public List<Tar> getRoom_config() {
