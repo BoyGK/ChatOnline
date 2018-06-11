@@ -16,6 +16,7 @@ public class ChatContext {
     }
 
     public List<ChatRoom> getRooms() {
+        System.out.println(rooms.size());
         return rooms;
     }
 
@@ -24,6 +25,7 @@ public class ChatContext {
         for (int i = 0; i < count; i++) {
             rooms.add(new ChatRoom(i + startId));
         }
+        System.out.println(rooms.size());
     }
 
     public void registerHandle(String key, ProcessHandle handle) {
