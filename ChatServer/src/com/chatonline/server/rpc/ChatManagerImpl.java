@@ -24,10 +24,12 @@ public class ChatManagerImpl implements IChatManager {
     @Override
     public boolean initChatRooms(Integer count, Integer startId) {
         try {
+            System.out.println("count = " + count);
+            System.out.println("startId = " + startId);
             chatContext.setRoomCount(count, startId);
             System.out.println("config rooms from service");
             //JVMInstance
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;

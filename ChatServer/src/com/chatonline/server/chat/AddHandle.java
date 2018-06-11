@@ -7,7 +7,7 @@ public class AddHandle implements ProcessHandle {
         int roomid = Integer.valueOf(user.getLastMsg());
         System.out.println(roomid);
         user.setRoomId(roomid);
-        ChatRoom chatRoom = chatContext.getRooms().get(roomid);
+        ChatRoom chatRoom = chatContext.getRooms().get(roomid - chatContext.getFrom());
         if (!chatRoom.isFull()) {
             chatRoom.registerUser(user);
             return true;

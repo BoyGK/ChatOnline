@@ -25,7 +25,7 @@ public class Application extends HttpServlet {
                 RpcClient client = new RpcClient();
                 client.rpc(tar.getTarget(), 6789, "initChatRooms",
                         IChatManager.class.getName(), new Class[]{Integer.class,Integer.class}, to - from, from);
-            }).start();
+        }).start();
         }
     }
 
