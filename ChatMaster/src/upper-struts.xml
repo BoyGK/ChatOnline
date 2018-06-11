@@ -19,5 +19,8 @@
 
         <action name="add_room" class="com.chatonline.master.upper.controller.AddRoomAction" method="execute">
         </action>
+
+        <action name="refash_room" class="com.chatonline.master.upper.controller.GetRoomAction" method="execute">
+        </action>
     </package>
 </struts>
