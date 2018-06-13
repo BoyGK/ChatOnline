@@ -93,4 +93,28 @@ public class UserService {
         dao.close();
         return new ResultModel("修改成功", 1, token);
     }
+
+    public ResultModel repass(String username, String pass,String token, String newpass) {
+        Dao dao = new UserDao();
+        List<User> users = dao.query();
+        dao.close();
+        for (User user1 : users) {
+            if (user1.getUsername().equals(username)&&user1.getPassword().equals(pass)) {
+                if (!user1.getToken().equals(token))
+                    return null;
+                return repasses(user1, newpass);
+            }
+        }
+        return null;
+    }
+
+    private ResultModel repasses(User user, String newpass) {
+        String token = CreateTokenFactory.getRandomString();
+        user.setToken(token);
+        user.setPassword(newpass);
+        Dao dao = new UserDao();
+        dao.updata(user);
+        dao.close();
+        return new ResultModel("修改成功", 1, token);
+    }
 }
